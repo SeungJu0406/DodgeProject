@@ -29,7 +29,6 @@ public class TurretRotate : MonoBehaviour
     
     public void DetectTarget()
     {
-        //transform.LookAt(target.position);
         int layerMask = 1 << LayerMask.NameToLayer("Player");
         Collider[] hits = Physics.OverlapSphere(transform.position, distance, layerMask);
         if(hits.Length > 0)
@@ -37,7 +36,6 @@ public class TurretRotate : MonoBehaviour
             Vector3 targetDirection = hits[0].transform.parent.position - transform.position;
             Quaternion lookingTarget = Quaternion.LookRotation(targetDirection);
             transform.rotation = Quaternion.Lerp(transform.rotation, lookingTarget, rotateSpeed * Time.deltaTime);
-            //LookAt(hits[0].transform.parent.position);
             turret.StartAttack();
         }
         else

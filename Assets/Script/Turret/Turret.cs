@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Turret : MonoBehaviour
@@ -16,17 +14,22 @@ public class Turret : MonoBehaviour
 
     bool isAttack;
 
-    public Mode mode {  get; private set; } 
+    int layermask;
+
+    public Mode mode { get; private set; }
 
     private void Awake()
     {
         curTime = attackTime - 1;
+        layermask = 1 << LayerMask.NameToLayer("Player");
     }
 
     private void Update()
     {
         if (!isAttack)
             return;
+        //if (!Physics.Raycast(transform.position, transform.forward, layermask))
+        //    return;
         curTime += Time.deltaTime;
         if (curTime > attackTime)
         {

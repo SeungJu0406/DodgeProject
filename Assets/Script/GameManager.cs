@@ -1,18 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public enum GameState { Ready, Progress ,Over }
+    public enum GameState { Ready, Progress, Goal, Over }
 
     [SerializeField] Map map;
 
     [SerializeField] Player player;
+
+    [HideInInspector] GameObject instancePlayerObj;
+
+    [HideInInspector] Player instancePlayer;
 
     [SerializeField] Turret turret;
 
@@ -23,15 +22,18 @@ public class GameManager : MonoBehaviour
     [Header("UI")]
     [SerializeField] GameObject readyUI;
     [SerializeField] GameObject gameOverUI;
+    [SerializeField] GameObject goalUI;
 
     private void Start()
     {
         Camera.main.transform.position = new Vector3(0, 18, -12);
-        Camera.main.transform.rotation = Quaternion.Euler(60, 0, 0);       
+        Camera.main.transform.rotation = Quaternion.Euler(60, 0, 0);
 
         player.transform.position = new Vector3(0, 0, 0);
-        GameObject instancePlayer =Instantiate(player.gameObject);
-        instancePlayer.GetComponent<Player>().OnDie += OverGame;
+        instancePlayerObj = Instantiate(player.gameObject);
+        instancePlayer=instancePlayerObj.GetComponent<Player>();
+        instancePlayer.OnDie += OverGame;
+        instancePlayer.OnWin += GoalGame;
         Camera.main.transform.parent = instancePlayer.transform;
 
 
@@ -42,10 +44,11 @@ public class GameManager : MonoBehaviour
             turretRotate.FindTarget();
             turret.StopAttack();
         }
-     
+
         curState = GameState.Ready;
         readyUI.SetActive(true);
         gameOverUI.SetActive(false);
+        goalUI.SetActive(false);
     }
 
     private void Update()
@@ -54,7 +57,7 @@ public class GameManager : MonoBehaviour
         {
             StartGame();
         }
-        else if (curState == GameState.Over && Input.GetKeyDown(KeyCode.R)) 
+        else if ((curState == GameState.Over||curState==GameState.Goal )&& Input.GetKeyDown(KeyCode.R))
         {
             SceneManager.LoadScene("GameScene");
         }
@@ -64,7 +67,6 @@ public class GameManager : MonoBehaviour
     {
         curState = GameState.Progress;
         readyUI.SetActive(false);
-        gameOverUI.SetActive(false);
         foreach (Turret turret in turrets)
         {
             turret.StartAttack();
@@ -74,8 +76,17 @@ public class GameManager : MonoBehaviour
     {
         // 타워 공격중지
         curState = GameState.Over;
-        readyUI.SetActive(false);
         gameOverUI.SetActive(true);
+        Camera.main.transform.parent = null; 
+        foreach (Turret turret in turrets)
+        {
+            turret.StopAttack();
+        }
+    }
+    void GoalGame()
+    {
+        curState = GameState.Goal; 
+        goalUI.SetActive(true);
         foreach (Turret turret in turrets)
         {
             turret.StopAttack();
