@@ -14,7 +14,7 @@ public class TurretFire : MonoBehaviour
 
     private void Awake()
     {
-        curTime = attackTime;
+        curTime = attackTime - 1;
     }
 
     private void Update()

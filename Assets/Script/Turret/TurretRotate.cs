@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TurretRotate : MonoBehaviour
 {
-    [SerializeField] Transform target;
+    [HideInInspector] Transform target;
 
     private void Start()
     {

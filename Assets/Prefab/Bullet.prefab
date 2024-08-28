@@ -162,7 +162,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletRb: {fileID: 637703075}
   bullet: {fileID: 637703076}
-  speed: 10
+  speed: 3
 --- !u!114 &637703076
 MonoBehaviour:
   m_ObjectHideFlags: 0
