@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
         Camera.main.transform.position = new Vector3(0, 18, -12);
         Camera.main.transform.rotation = Quaternion.Euler(60, 0, 0);
 
-        player.transform.position = new Vector3(0, 0, 0);       
+        player.transform.position = new Vector3(0, 0, 0);
         GameObject instancePlayer =Instantiate(player.gameObject);
         instancePlayer.GetComponent<Player>().OnDie += OverGame;
         
@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
         foreach (Turret turret in turrets)
         {
             TurretRotate turretRotate = turret.GetComponent<TurretRotate>();
-            turretRotate.LookTarget();
+            turretRotate.FindTarget();
             turret.StopAttack();
         }
      
