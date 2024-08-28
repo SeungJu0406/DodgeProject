@@ -108,6 +108,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1619028753799911290}
+  - component: {fileID: 741256956938188129}
   m_Layer: 0
   m_Name: MuzzelPoint
   m_TagString: Untagged
@@ -130,6 +131,20 @@ Transform:
   m_Father: {fileID: 7504706638029570140}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &741256956938188129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2277509920226579960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1c45996545366a44a84fc6986be8d92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bullet: {fileID: 0}
+  size: 5
 --- !u!1 &3046054379343474207
 GameObject:
   m_ObjectHideFlags: 0
@@ -139,6 +154,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4262473241223538421}
+  - component: {fileID: 7456648270518017865}
   m_Layer: 0
   m_Name: Turret
   m_TagString: Untagged
@@ -163,6 +179,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7456648270518017865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3046054379343474207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c4f091effab323499500e81aaa889bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPool: {fileID: 741256956938188129}
+  muzzlePoint: {fileID: 1619028753799911290}
+  attackTime: 2
 --- !u!1 &5471787895527905261
 GameObject:
   m_ObjectHideFlags: 0

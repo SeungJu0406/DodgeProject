@@ -5,4 +5,6 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     [SerializeField] int damage;
+
+    [HideInInspector] public BulletPool bulletPool;  
 }
