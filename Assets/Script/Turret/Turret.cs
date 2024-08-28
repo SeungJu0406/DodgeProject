@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Turret : MonoBehaviour
 {
+    public enum Mode { Fire, Stop }
+
     [SerializeField] BulletPool bulletPool;
 
     [SerializeField] Transform muzzlePoint;
@@ -13,6 +15,8 @@ public class Turret : MonoBehaviour
     float curTime;
 
     bool isAttack;
+
+    public Mode mode {  get; private set; } 
 
     private void Awake()
     {
@@ -33,10 +37,12 @@ public class Turret : MonoBehaviour
 
     public void StartAttack()
     {
+        mode = Mode.Fire;
         this.isAttack = true;
     }
     public void StopAttack()
     {
+        mode = Mode.Stop;
         this.isAttack = false;
     }
     public GameObject Clone()

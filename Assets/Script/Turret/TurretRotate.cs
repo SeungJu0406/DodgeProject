@@ -19,17 +19,11 @@ public class TurretRotate : MonoBehaviour
     public void DetectTarget()
     {
         transform.LookAt(target.position);
-        Debug.DrawRay(transform.position, transform.forward * distance, Color.red);
-        if(Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, distance))
+        int layerMask = 1 << LayerMask.NameToLayer("Player");
+        Collider[] hits = Physics.OverlapSphere(transform.position, distance, layerMask);
+        if(hits.Length > 0)
         {
-            if(hit.transform.gameObject.GetComponent<Player>() != null)
-            {
-                turret.StartAttack();
-            }
-            else
-            {
-                turret.StopAttack();
-            }
+            turret.StartAttack();
         }
         else
         {
