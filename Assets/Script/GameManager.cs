@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
 
     [HideInInspector] TurretFire[] turretFires;
 
-    [SerializeField] GameObject[] turrets;
+    [SerializeField] Turret[] turrets;
 
     [SerializeField] GameState curState;
 
@@ -29,10 +29,10 @@ public class GameManager : MonoBehaviour
         instancePlayer.GetComponent<Player>().OnDie += OverGame;
         
 
-
         int index = 0;
+        turrets = FindObjectsOfType<Turret>();
         turretFires = new TurretFire[turrets.Length];
-        foreach (GameObject turret in turrets)
+        foreach (Turret turret in turrets)
         {
             TurretRotate turretRotate = turret.GetComponent<TurretRotate>();
             turretRotate.LookTarget();
