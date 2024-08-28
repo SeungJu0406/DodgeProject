@@ -50,7 +50,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!114 &5720757770764743610
 MonoBehaviour:
@@ -65,8 +65,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerRb: {fileID: 5578678271487804779}
-  moveSpeed: 3
-  rotateSpeed: 50
+  moveSpeed: 4
+  rotateSpeed: 15
 --- !u!1 &3407829730392562148
 GameObject:
   m_ObjectHideFlags: 0

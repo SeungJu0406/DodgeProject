@@ -15,11 +15,17 @@ public class PlayerMover : MonoBehaviour
 
     private void Move()
     {
-        float x = Input.GetAxisRaw("Horizontal");
-        float z = Input.GetAxisRaw("Vertical");
+        float x = Input.GetAxis("Horizontal");
+        float z = Input.GetAxis("Vertical");
 
-        playerRb.velocity = new Vector3(x * moveSpeed, 0, z * moveSpeed);
-        
+        Vector3 moveDir = new Vector3(x, 0, z);
+        if (moveDir.magnitude > 1) // magnitude : ∫§≈Õ¿« ≈©±‚
+        {
+            moveDir.Normalize();
+        }
+        playerRb.velocity = moveDir * moveSpeed;
+
+
         if (x != 0 || z != 0)
         {
             Quaternion rotateDir = Quaternion.LookRotation(playerRb.velocity);
