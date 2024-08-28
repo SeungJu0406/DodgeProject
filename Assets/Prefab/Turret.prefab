@@ -195,7 +195,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPool: {fileID: 741256956938188129}
   muzzlePoint: {fileID: 1619028753799911290}
-  attackTime: 1
+  attackTime: 1.5
 --- !u!114 &1660122117
 MonoBehaviour:
   m_ObjectHideFlags: 0

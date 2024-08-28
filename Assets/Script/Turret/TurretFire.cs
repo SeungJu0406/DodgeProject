@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TurretFire : MonoBehaviour
@@ -7,10 +5,12 @@ public class TurretFire : MonoBehaviour
     [SerializeField] BulletPool bulletPool;
 
     [SerializeField] Transform muzzlePoint;
-    
+
     [SerializeField] float attackTime;
 
     float curTime;
+
+    bool isAttack;
 
     private void Awake()
     {
@@ -19,11 +19,22 @@ public class TurretFire : MonoBehaviour
 
     private void Update()
     {
-       curTime += Time.deltaTime;
-        if (curTime > attackTime) 
+        if (!isAttack)
+            return;
+        curTime += Time.deltaTime;
+        if (curTime > attackTime)
         {
             bulletPool.GetPool(muzzlePoint.position, muzzlePoint.rotation);
             curTime = 0;
         }
+    }
+
+    public void StartAttack()
+    {
+        this.isAttack = true;
+    }
+    public void StopAttack()
+    {
+        this.isAttack = false;
     }
 }

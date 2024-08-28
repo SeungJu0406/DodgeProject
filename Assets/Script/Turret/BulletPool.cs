@@ -34,7 +34,13 @@ public class BulletPool : MonoBehaviour
             instance.gameObject.SetActive(true);
             return instance;
         }
-        return null;
+        else
+        {
+            Bullet instance = Instantiate(bullet, pos, rot);
+            instance.bulletPool = this;
+            instance.transform.parent = null;
+            return instance;
+        }
     }
 
     public void ReturnPool(Bullet instance)
