@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    enum GameState { Ready, Progress ,Over }
+    public enum GameState { Ready, Progress ,Over }
 
     [SerializeField] Map map;
 
@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] Turret[] turrets;
 
-    [SerializeField] GameState curState;
+    [SerializeField] public GameState curState;
 
     [Header("UI")]
     [SerializeField] GameObject readyUI;

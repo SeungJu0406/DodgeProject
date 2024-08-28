@@ -193,6 +193,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 10
+  rotateSpeed: 5
   turret: {fileID: 615243253990727520}
 --- !u!114 &615243253990727520
 MonoBehaviour:
