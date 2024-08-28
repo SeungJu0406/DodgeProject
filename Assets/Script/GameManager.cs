@@ -27,12 +27,13 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         Camera.main.transform.position = new Vector3(0, 18, -12);
-        Camera.main.transform.rotation = Quaternion.Euler(60, 0, 0);
+        Camera.main.transform.rotation = Quaternion.Euler(60, 0, 0);       
 
         player.transform.position = new Vector3(0, 0, 0);
         GameObject instancePlayer =Instantiate(player.gameObject);
         instancePlayer.GetComponent<Player>().OnDie += OverGame;
-        
+        Camera.main.transform.parent = instancePlayer.transform;
+
 
         turrets = FindObjectsOfType<Turret>();
         foreach (Turret turret in turrets)
