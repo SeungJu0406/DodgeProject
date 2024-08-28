@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8846371714867887162}
   - component: {fileID: 516423418120098501}
   - component: {fileID: 659510330736611988}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109,7 +109,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1619028753799911290}
   - component: {fileID: 741256956938188129}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: MuzzelPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -157,7 +157,7 @@ GameObject:
   - component: {fileID: 7456648270518017865}
   - component: {fileID: 1660122117}
   - component: {fileID: 615243253990727520}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -232,7 +232,7 @@ GameObject:
   - component: {fileID: 4229319830414061886}
   - component: {fileID: 4268948014541194563}
   - component: {fileID: 4985144543736861334}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}

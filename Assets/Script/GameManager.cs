@@ -19,6 +19,10 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] GameState curState;
 
+    [Header("UI")]
+    [SerializeField] GameObject readyUI;
+    [SerializeField] GameObject gameOverUI;
+
     private void Start()
     {
         Camera.main.transform.position = new Vector3(0,18,-12);
@@ -44,6 +48,8 @@ public class GameManager : MonoBehaviour
         {
             turretFire.StopAttack();
         }
+        readyUI.SetActive(true);
+        gameOverUI.SetActive(false);
     }
 
     private void Update()
@@ -57,7 +63,9 @@ public class GameManager : MonoBehaviour
     void StartGame()
     {
         curState = GameState.Progress;
-        foreach(TurretFire turretFire in turretFires)
+        readyUI.SetActive(false);
+        gameOverUI.SetActive(false);
+        foreach (TurretFire turretFire in turretFires)
         {
             turretFire.StartAttack();
         }
@@ -66,6 +74,8 @@ public class GameManager : MonoBehaviour
     {
         // 타워 공격중지
         curState = GameState.Over;
+        readyUI.SetActive(false);
+        gameOverUI.SetActive(true);
         foreach (TurretFire turretFire in turretFires)
         {
             turretFire.StopAttack();
