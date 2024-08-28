@@ -154,7 +154,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4262473241223538421}
-  - component: {fileID: 7456648270518017865}
   - component: {fileID: 1660122117}
   - component: {fileID: 615243253990727520}
   m_Layer: 7
@@ -181,21 +180,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7456648270518017865
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3046054379343474207}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c4f091effab323499500e81aaa889bb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletPool: {fileID: 741256956938188129}
-  muzzlePoint: {fileID: 1619028753799911290}
-  attackTime: 1.5
 --- !u!114 &1660122117
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -220,6 +204,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e066d66b268b674ebcaa39ad9a24328, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bulletPool: {fileID: 741256956938188129}
+  muzzlePoint: {fileID: 1619028753799911290}
+  attackTime: 1.5
 --- !u!1 &5471787895527905261
 GameObject:
   m_ObjectHideFlags: 0

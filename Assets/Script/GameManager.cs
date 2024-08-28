@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,8 +16,6 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] Turret turret;
 
-    [HideInInspector] TurretFire[] turretFires;
-
     [SerializeField] Turret[] turrets;
 
     [SerializeField] GameState curState;
@@ -25,7 +26,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        Camera.main.transform.position = new Vector3(0,18,-12);
+        Camera.main.transform.position = new Vector3(0, 18, -12);
         Camera.main.transform.rotation = Quaternion.Euler(60, 0, 0);
 
         player.transform.position = new Vector3(0, 0, 0);       
@@ -33,30 +34,28 @@ public class GameManager : MonoBehaviour
         instancePlayer.GetComponent<Player>().OnDie += OverGame;
         
 
-        int index = 0;
         turrets = FindObjectsOfType<Turret>();
-        turretFires = new TurretFire[turrets.Length];
         foreach (Turret turret in turrets)
         {
             TurretRotate turretRotate = turret.GetComponent<TurretRotate>();
             turretRotate.LookTarget();
-            turretFires[index++] = turret.GetComponent<TurretFire>();
+            turret.StopAttack();
         }
      
         curState = GameState.Ready;
-        foreach (TurretFire turretFire in turretFires)
-        {
-            turretFire.StopAttack();
-        }
         readyUI.SetActive(true);
         gameOverUI.SetActive(false);
     }
 
     private void Update()
     {
-        if (curState == GameState.Ready && Input.anyKeyDown) 
+        if (curState == GameState.Ready && Input.anyKeyDown)
         {
             StartGame();
+        }
+        else if (curState == GameState.Over && Input.GetKeyDown(KeyCode.R)) 
+        {
+            SceneManager.LoadScene("GameScene");
         }
     }
 
@@ -65,9 +64,9 @@ public class GameManager : MonoBehaviour
         curState = GameState.Progress;
         readyUI.SetActive(false);
         gameOverUI.SetActive(false);
-        foreach (TurretFire turretFire in turretFires)
+        foreach (Turret turret in turrets)
         {
-            turretFire.StartAttack();
+            turret.StartAttack();
         }
     }
     void OverGame()
@@ -76,9 +75,9 @@ public class GameManager : MonoBehaviour
         curState = GameState.Over;
         readyUI.SetActive(false);
         gameOverUI.SetActive(true);
-        foreach (TurretFire turretFire in turretFires)
+        foreach (Turret turret in turrets)
         {
-            turretFire.StopAttack();
+            turret.StopAttack();
         }
     }
 
