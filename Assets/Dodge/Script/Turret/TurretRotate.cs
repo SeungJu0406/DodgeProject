@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class TurretRotate : MonoBehaviour
@@ -5,7 +6,9 @@ public class TurretRotate : MonoBehaviour
 
     [SerializeField] float distance;
 
-    [SerializeField] float rotateSpeed;
+    [SerializeField] float DetectingRotateSpeed;
+
+    [SerializeField] float UndetectingRotateSpeed;
 
     [SerializeField] Turret turret;
 
@@ -29,8 +32,7 @@ public class TurretRotate : MonoBehaviour
     public void DetectTarget(Player player)
     {
         Vector3 targetDirection = player.transform.position - transform.position;
-        Debug.DrawRay(rayPoint.position, targetDirection * distance);
-        if (Physics.Raycast(transform.position, targetDirection, out RaycastHit hit, distance))
+        if (Physics.SphereCast(transform.position, 0.3f,targetDirection, out RaycastHit hit, distance))
         {
             if (hit.collider.gameObject.tag != "Player")
             {
@@ -38,7 +40,7 @@ public class TurretRotate : MonoBehaviour
                 return;
             }
             Quaternion lookingTarget = Quaternion.LookRotation(targetDirection);
-            transform.rotation = Quaternion.Lerp(transform.rotation, lookingTarget, rotateSpeed * Time.deltaTime);
+            transform.rotation = Quaternion.Lerp(transform.rotation, lookingTarget, DetectingRotateSpeed * Time.deltaTime);
             turret.mode = Turret.Mode.Fire;
         }
     }
@@ -54,11 +56,9 @@ public class TurretRotate : MonoBehaviour
             }
             turret.mode = Turret.Mode.Stop;
         }
+        else if (turret.mode == Turret.Mode.Stop)
+        {
+            transform.Rotate(Vector3.up * UndetectingRotateSpeed * Time.deltaTime);
+        }
     }
-    //public void FindTarget()
-    //{
-    //    GameObject player = GameObject.FindGameObjectWithTag("Player");
-
-    //    target = player.transform;
-    //}
 }

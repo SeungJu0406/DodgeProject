@@ -211,10 +211,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 10
-  rotateSpeed: 5
+  DetectingRotateSpeed: 5
+  UndetectingRotateSpeed: 30
   turret: {fileID: 615243253990727520}
   rayPoint: {fileID: 2319426878476908580}
-  curMode: 0
 --- !u!114 &615243253990727520
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -229,7 +229,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPool: {fileID: 741256956938188129}
   muzzlePoint: {fileID: 1619028753799911290}
-  attackTime: 1.5
+  attackTime: 1
+  mode: 0
 --- !u!114 &6046281610339437428
 MonoBehaviour:
   m_ObjectHideFlags: 0

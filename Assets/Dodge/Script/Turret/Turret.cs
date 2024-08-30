@@ -1,6 +1,5 @@
+using System.Collections;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
-using UnityEngine.Rendering;
 
 public class Turret : MonoBehaviour
 {
@@ -13,32 +12,45 @@ public class Turret : MonoBehaviour
     [SerializeField] public float attackTime;
 
 
-    float curTime;
+    Coroutine attackRoutine;
 
     public Mode mode;
 
     private void Awake()
     {
-        curTime = attackTime-1;
         mode = Mode.Stop;
     }
 
     private void Update()
     {
         CheckMode();
-        if(mode == Mode.Fire)
-        {
-            Fire();
-        }     
+
+        Fire();
     }
 
     void Fire()
     {
-        curTime += Time.deltaTime;
-        if (curTime > attackTime)
+        if (mode == Mode.Fire)
         {
+            if (attackRoutine != null) { return; }
+            attackRoutine = StartCoroutine(AttackRoutine());
+        }
+        else if (mode == Mode.Stop) 
+        {
+            if (attackRoutine == null) { return; }
+            StopCoroutine(attackRoutine);
+            attackRoutine = null;
+        }
+    }
+
+    IEnumerator AttackRoutine()
+    {
+        WaitForSeconds delay = new WaitForSeconds(attackTime/2);
+        while (true)
+        {
+            yield return delay;
             bulletPool.GetPool(muzzlePoint.position, muzzlePoint.rotation);
-            curTime = 0;
+            yield return delay;
         }
     }
     void CheckMode()
@@ -60,7 +72,6 @@ public class Turret : MonoBehaviour
     public void StopAttack()
     {
         mode = Mode.Stop;
-        curTime = attackTime-1;
     }
     public GameObject Clone()
     {
