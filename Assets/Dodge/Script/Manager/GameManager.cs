@@ -6,12 +6,6 @@ public enum GameState { Ready, Progress, Goal, Over }
 public class GameManager : MonoBehaviour
 {   
     public static GameManager Instance;
-
-    public Player player;
-
-    public Detecting playerdetecting;
-
-    public Goal goal;
     
     public GameState curState;
 
@@ -70,28 +64,23 @@ public class GameManager : MonoBehaviour
     public void ReadyGame()
     {
         curState = GameState.Ready;
-        playerdetecting.enabled = false;
         OnReady?.Invoke();
     }
 
     public void StartGame()
     {
         curState = GameState.Progress;
-        playerdetecting.enabled = true;
         OnStart?.Invoke();
     }
     public void GameOver()
     {
         curState = GameState.Over;
         Camera.main.transform.parent = null;
-        playerdetecting.enabled = false;
         OnGameOver?.Invoke();
     }
     public void GoalGame()
     {
         curState = GameState.Goal; 
-        playerdetecting.enabled = false;
-        player.enabled = false;
         OnGoal?.Invoke();
     }
 

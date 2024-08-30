@@ -18,6 +18,13 @@ public class TurretRotate : MonoBehaviour
 
     int layerMask;
 
+    bool canDetect;
+    private void Start()
+    {
+        Manager.Game.OnReady += CantDetect;
+        Manager.Game.OnStart += CanDetect;
+        Manager.Game.OnGoal += CantDetect;
+    }
     public void Update()
     {
         UndetectTarget();
@@ -29,16 +36,20 @@ public class TurretRotate : MonoBehaviour
         {
             if (hit.collider.gameObject.tag != "Player")
             {
-                turret.mode = Turret.Mode.Stop;
+                turret.StopAttack();
                 return;
             }
             Quaternion lookingTarget = Quaternion.LookRotation(targetDirection);
             transform.rotation = Quaternion.Lerp(transform.rotation, lookingTarget, DetectingRotateSpeed * Time.deltaTime);
-            turret.mode = Turret.Mode.Fire;
+            turret.StartAttack();
         }
     }
     void UndetectTarget()
     {
+        if (!canDetect)
+        {
+            turret.StopAttack();            
+        }
         if (turret.mode == Turret.Mode.Fire)
         {
             Collider[] hits = Physics.OverlapSphere(transform.position, distance);
@@ -47,11 +58,20 @@ public class TurretRotate : MonoBehaviour
                 if (hit.gameObject.tag == "Player")
                     return;
             }
-            turret.mode = Turret.Mode.Stop;
+            turret.StopAttack();
         }
         else if (turret.mode == Turret.Mode.Stop)
         {
             transform.Rotate(Vector3.up * UndetectingRotateSpeed * Time.deltaTime);
         }
+    }
+
+    void CanDetect()
+    {
+        canDetect = true;
+    }
+    void CantDetect()
+    {
+        canDetect = false;
     }
 }

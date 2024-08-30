@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Map : MonoBehaviour
@@ -21,6 +22,11 @@ public class Map : MonoBehaviour
         goalIntence.SetActive(false);
     }
     private void Start()
+    {
+        Manager.Game.OnStart += StartCheckTime;
+    }
+
+    void StartCheckTime()
     {
         timeChecker = StartCoroutine(CheckTime());
     }

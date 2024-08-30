@@ -1,26 +1,32 @@
-using JetBrains.Annotations;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class Player : MonoBehaviour, IHit
 {
     [SerializeField] int hp;
 
     public event Action OnDie;
-    
 
+    bool canHit;
+
+    void Awake()
+    {
+        CanHit();
+    }
     void Start()
     {
-        Manager.Game.player = this;
         OnDie += Manager.Game.GameOver;
+        Manager.Game.OnReady += CantHit;
+        Manager.Game.OnStart += CanHit;
+        Manager.Game.OnGoal += CantHit;
+        Manager.Game.OnGameOver += CantHit;
         Camera.main.transform.parent = transform;
     }
 
     public void Hit(int damage)
     {
+        if (!canHit)
+            return;
         hp -= damage;
         if (hp <= 0)
         {
@@ -31,8 +37,16 @@ public class Player : MonoBehaviour, IHit
     void Die()
     {
         OnDie?.Invoke();
-        gameObject.SetActive(false);      
+        gameObject.SetActive(false);
+    }
+    void CanHit()
+    {
+        canHit = true;
     }
 
+    void CantHit()
+    {
+        canHit = false;
+    }
 
 }
