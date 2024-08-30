@@ -7,9 +7,16 @@ public class Manager : MonoBehaviour
     public static GameManager Game { get { return GameManager.Instance; } }
     public static UIManager UI { get { return UIManager.Instance; } }
 
-    public void OnEnable()
+    public static ScoreManager Score { get { return ScoreManager.Instance; } }
+
+    private void OnEnable()
     {
         GameManager.Create();
         UIManager.Create();
+        ScoreManager.Create();
+    }
+    private void Start()
+    {
+        Score.Subscribe();
     }
 }

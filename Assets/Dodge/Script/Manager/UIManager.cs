@@ -9,8 +9,13 @@ public class UIManager : MonoBehaviour
 
     [Header("UI")]
     [SerializeField] GameObject uiManager;
+
     [SerializeField] GameObject readyUI;
+
+    [SerializeField] GameObject scoreUI;
+
     [SerializeField] GameObject gameOverUI;
+
     [SerializeField] GameObject goalUI;
 
     private void Awake()
@@ -40,6 +45,8 @@ public class UIManager : MonoBehaviour
 
         Transform readyUITF = uiManager.transform.Find("ReadyUI");
         readyUI = readyUITF.gameObject;
+        Transform scoreUITF = uiManager.transform.Find("ScoreUI");
+        scoreUI = scoreUITF.gameObject;
         Transform gameOverUITF = uiManager.transform.Find("GameOverUI");
         gameOverUI = gameOverUITF.gameObject;
         Transform goalUITF = uiManager.transform.Find("GoalUI");

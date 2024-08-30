@@ -62,6 +62,7 @@ public class GameManager : MonoBehaviour
         goal.OnWin += GoalGame;
 
         ReadyGame();
+        OnReady?.Invoke();
     }
 
     private void Update()
