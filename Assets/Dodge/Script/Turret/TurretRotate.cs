@@ -18,13 +18,6 @@ public class TurretRotate : MonoBehaviour
 
     int layerMask;
 
-    GameManager gameManager;
-    private void Start()
-    {
-        GameObject gameManagerInstance = GameObject.FindGameObjectWithTag("GameController");
-        gameManager = gameManagerInstance.GetComponent<GameManager>();
-        layerMask = 1 << LayerMask.GetMask("Player");
-    }
     public void Update()
     {
         UndetectTarget();

@@ -49,9 +49,7 @@ public class UIManager : MonoBehaviour
         Manager.Game.OnGameOver += GameOverUI;
         Manager.Game.OnGoal += GoalUI;
 
-        ReadyUI();
-
-        
+        ReadyUI();      
     }
 
 
