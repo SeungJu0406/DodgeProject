@@ -49,21 +49,16 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         Camera.main.transform.position = new Vector3(0, 18, -12);
-        Camera.main.transform.rotation = Quaternion.Euler(60, 0, 0);
-
-        GameObject playerObject = GameObject.FindGameObjectWithTag("Player"); 
-        player= playerObject.GetComponent<Player>();
-        player.OnDie += GameOver;     
-        playerdetecting = playerObject.GetComponent<Detecting>();
-        Camera.main.transform.parent = player.transform;
-
-        ReadyGame();
-        OnReady?.Invoke();
+        Camera.main.transform.rotation = Quaternion.Euler(60, 0, 0);      
     }
 
     private void Update()
     {
-        if (curState == GameState.Ready && Input.anyKeyDown)
+        if(curState == GameState.Ready && !Input.anyKeyDown)
+        {
+            ReadyGame();
+        }
+        else if (curState == GameState.Ready && Input.anyKeyDown)
         {
             StartGame();
         }
@@ -96,6 +91,7 @@ public class GameManager : MonoBehaviour
     {
         curState = GameState.Goal; 
         playerdetecting.enabled = false;
+        player.enabled = false;
         OnGoal?.Invoke();
     }
 

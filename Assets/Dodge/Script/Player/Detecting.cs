@@ -8,6 +8,10 @@ public class Detecting : MonoBehaviour
 
     [SerializeField] Player player;
 
+    private void Start()
+    {
+        Manager.Game.playerdetecting = this;
+    }
     private void Update()
     {
        Detect();

@@ -12,7 +12,12 @@ public class Player : MonoBehaviour, IHit
     public event Action OnDie;
     
 
-
+    void Start()
+    {
+        Manager.Game.player = this;
+        OnDie += Manager.Game.GameOver;
+        Camera.main.transform.parent = transform;
+    }
 
     public void Hit(int damage)
     {
