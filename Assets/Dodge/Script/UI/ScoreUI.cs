@@ -10,7 +10,7 @@ public class ScoreUI : MonoBehaviour
     int curScore {  get { return Manager.Score.curScore; } }
     void Update()
     {
-        if (curScore >= bestScore)
+        if (curScore < bestScore)
         {
             scoreText.color =Color.green;
         }

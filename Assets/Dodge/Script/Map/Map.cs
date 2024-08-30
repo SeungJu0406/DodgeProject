@@ -4,15 +4,37 @@ using UnityEngine;
 
 public class Map : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] int openingTime;
 
-    // Update is called once per frame
-    void Update()
+    [SerializeField] GameObject doorWall;
+
+    [SerializeField] Goal goal;
+
+    [HideInInspector] GameObject goalIntence;
+
+    Coroutine timeChecker;
+
+    private void Awake()
     {
-        
+        goalIntence = Instantiate(goal.gameObject);
+        goalIntence.transform.parent = transform;
+        goalIntence.SetActive(false);
+    }
+    private void Start()
+    {
+        timeChecker = StartCoroutine(CheckTime());
+    }
+    IEnumerator CheckTime()
+    {
+        WaitForSeconds delay = new WaitForSeconds(0.1f);
+        while (true)
+        {
+            if (Manager.Score.curScore >= openingTime)
+            {
+                goalIntence.gameObject.SetActive(true);
+                doorWall.SetActive(false);
+            }
+            yield return delay;
+        }
     }
 }

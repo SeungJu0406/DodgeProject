@@ -63,7 +63,7 @@ public class ScoreManager : MonoBehaviour
             StopCoroutine(timeRoutine);
             timeRoutine = null;
         }
-        if(curScore > bestScore)
+        if(bestScore <= 0 || curScore < bestScore)
         {
             bestScore = curScore;
         }

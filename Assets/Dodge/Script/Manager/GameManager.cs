@@ -7,11 +7,11 @@ public class GameManager : MonoBehaviour
 {   
     public static GameManager Instance;
 
-    Player player;
+    public Player player;
 
-    Detecting playerdetecting;
+    public Detecting playerdetecting;
 
-    Goal goal;
+    public Goal goal;
     
     public GameState curState;
 
@@ -57,10 +57,6 @@ public class GameManager : MonoBehaviour
         playerdetecting = playerObject.GetComponent<Detecting>();
         Camera.main.transform.parent = player.transform;
 
-        GameObject goalObject = GameObject.FindGameObjectWithTag("Finish");
-        goal = goalObject.GetComponent<Goal>();
-        goal.OnWin += GoalGame;
-
         ReadyGame();
         OnReady?.Invoke();
     }
@@ -76,27 +72,27 @@ public class GameManager : MonoBehaviour
             SceneManager.LoadScene("GameScene");
         }
     }
-    void ReadyGame()
+    public void ReadyGame()
     {
         curState = GameState.Ready;
         playerdetecting.enabled = false;
         OnReady?.Invoke();
     }
 
-    void StartGame()
+    public void StartGame()
     {
         curState = GameState.Progress;
         playerdetecting.enabled = true;
         OnStart?.Invoke();
     }
-    void GameOver()
+    public void GameOver()
     {
         curState = GameState.Over;
         Camera.main.transform.parent = null;
         playerdetecting.enabled = false;
         OnGameOver?.Invoke();
     }
-    void GoalGame()
+    public void GoalGame()
     {
         curState = GameState.Goal; 
         playerdetecting.enabled = false;
