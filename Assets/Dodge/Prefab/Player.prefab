@@ -74,10 +74,10 @@ GameObject:
   - component: {fileID: 5553114349496433587}
   - component: {fileID: 3548629654920622948}
   - component: {fileID: 7795159135744597947}
-  - component: {fileID: 4528390731407931660}
+  - component: {fileID: 2696763811150956583}
   m_Layer: 9
   m_Name: Body
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -147,7 +147,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &4528390731407931660
+--- !u!136 &2696763811150956583
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -171,9 +171,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4190191794129243224}
   - component: {fileID: 4017757954008164195}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: GameObject
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -222,10 +222,10 @@ GameObject:
   - component: {fileID: 1266433450794134380}
   - component: {fileID: 3447589643867389219}
   - component: {fileID: 6713492921938789436}
-  - component: {fileID: 4869280855280069271}
+  - component: {fileID: 7386525369099205890}
   m_Layer: 9
   m_Name: Eye
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -295,7 +295,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &4869280855280069271
+--- !u!136 &7386525369099205890
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -305,8 +305,8 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
+  m_Radius: 0.5000001
+  m_Height: 2.0000005
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3903700391736550635
@@ -320,10 +320,10 @@ GameObject:
   - component: {fileID: 2972356482295814026}
   - component: {fileID: 2466733793564443648}
   - component: {fileID: 3946906229398013208}
-  - component: {fileID: 3099734316917902036}
+  - component: {fileID: 7472995128381156506}
   m_Layer: 9
   m_Name: Pack
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -393,7 +393,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3099734316917902036
+--- !u!65 &7472995128381156506
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -404,5 +404,5 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
   m_Center: {x: 0, y: 0, z: 0}

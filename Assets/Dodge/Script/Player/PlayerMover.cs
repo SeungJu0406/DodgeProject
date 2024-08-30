@@ -28,7 +28,7 @@ public class PlayerMover : MonoBehaviour
 
         if (x != 0 || z != 0)
         {
-            Quaternion rotateDir = Quaternion.LookRotation(playerRb.velocity);
+            Quaternion rotateDir = Quaternion.LookRotation(moveDir);
             transform.rotation = Quaternion.Lerp(transform.rotation, rotateDir, rotateSpeed * Time.deltaTime);
         }
 
