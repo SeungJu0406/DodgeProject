@@ -2,56 +2,63 @@ using UnityEngine;
 
 public class TurretRotate : MonoBehaviour
 {
+
     [SerializeField] float distance;
 
     [SerializeField] float rotateSpeed;
 
     [SerializeField] Turret turret;
 
+    [SerializeField] Transform rayPoint;
+
     [HideInInspector] Transform target;
+
+    int layerMask;
 
     GameManager gameManager;
     private void Start()
     {
         GameObject gameManagerInstance = GameObject.FindGameObjectWithTag("GameController");
         gameManager = gameManagerInstance.GetComponent<GameManager>();
+        layerMask = 1 << LayerMask.GetMask("Player");
     }
-
-    private void Update()
+    public void Update()
     {
-        if (gameManager.curState == GameManager.GameState.Progress)
-        {
-            DetectTarget();
-        }
+        UndetectTarget();
     }
-
-    public void DetectTarget()
+    public void DetectTarget(Player player)
     {
-        int layerMask = 1 << LayerMask.NameToLayer("Player");
-        Collider[] hits = Physics.OverlapSphere(transform.position, distance, layerMask);
-        if (hits.Length > 0)
+        Vector3 targetDirection = player.transform.position - transform.position;
+        Debug.DrawRay(rayPoint.position, targetDirection * distance);
+        if (Physics.Raycast(transform.position, targetDirection, out RaycastHit hit, distance))
         {
-            Vector3 targetDirection = hits[0].transform.parent.position - transform.position;
-            Debug.DrawRay(transform.position, targetDirection * 100f);
-            if (Physics.Raycast(transform.position, targetDirection, out RaycastHit hit,distance))
+            if (hit.collider.gameObject.tag != "Player")
             {
-                if (hit.collider.gameObject.tag != "Player")
-                    return;
-                Quaternion lookingTarget = Quaternion.LookRotation(targetDirection);
-                transform.rotation = Quaternion.Lerp(transform.rotation, lookingTarget, rotateSpeed * Time.deltaTime);
-                turret.StartAttack();
+                turret.mode = Turret.Mode.Stop;
                 return;
-
             }
-
+            Quaternion lookingTarget = Quaternion.LookRotation(targetDirection);
+            transform.rotation = Quaternion.Lerp(transform.rotation, lookingTarget, rotateSpeed * Time.deltaTime);
+            turret.mode = Turret.Mode.Fire;
         }
-        turret.StopAttack();
     }
-
-    public void FindTarget()
+    void UndetectTarget()
     {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-
-        target = player.transform;
+        if (turret.mode == Turret.Mode.Fire)
+        {
+            Collider[] hits = Physics.OverlapSphere(transform.position, distance);
+            foreach (Collider hit in hits)
+            {
+                if (hit.gameObject.tag == "Player")
+                    return;
+            }
+            turret.mode = Turret.Mode.Stop;
+        }
     }
+    //public void FindTarget()
+    //{
+    //    GameObject player = GameObject.FindGameObjectWithTag("Player");
+
+    //    target = player.transform;
+    //}
 }

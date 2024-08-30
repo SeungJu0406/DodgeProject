@@ -13,9 +13,7 @@ public class GameManager : MonoBehaviour
 
     [HideInInspector] Player instancePlayer;
 
-    [SerializeField] Turret turret;
-
-    [SerializeField] Turret[] turrets;
+    [HideInInspector] Detecting playerdetecting;
 
     [SerializeField] public GameState curState;
 
@@ -34,18 +32,14 @@ public class GameManager : MonoBehaviour
         instancePlayer=instancePlayerObj.GetComponent<Player>();
         instancePlayer.OnDie += OverGame;
         instancePlayer.OnWin += GoalGame;
+        playerdetecting = instancePlayerObj.GetComponent<Detecting>();
         Camera.main.transform.parent = instancePlayer.transform;
 
 
-        turrets = FindObjectsOfType<Turret>();
-        foreach (Turret turret in turrets)
-        {
-            TurretRotate turretRotate = turret.GetComponent<TurretRotate>();
-            turretRotate.FindTarget();
-            turret.StopAttack();
-        }
-
         curState = GameState.Ready;
+        
+        playerdetecting.enabled = false;
+
         readyUI.SetActive(true);
         gameOverUI.SetActive(false);
         goalUI.SetActive(false);
@@ -67,30 +61,21 @@ public class GameManager : MonoBehaviour
     {
         curState = GameState.Progress;
         readyUI.SetActive(false);
-        foreach (Turret turret in turrets)
-        {
-            turret.StartAttack();
-        }
+        playerdetecting.enabled = true;
     }
     void OverGame()
     {
         // 타워 공격중지
         curState = GameState.Over;
         gameOverUI.SetActive(true);
-        Camera.main.transform.parent = null; 
-        foreach (Turret turret in turrets)
-        {
-            turret.StopAttack();
-        }
+        Camera.main.transform.parent = null;
+        playerdetecting.enabled = false;
     }
     void GoalGame()
     {
         curState = GameState.Goal; 
         goalUI.SetActive(true);
-        foreach (Turret turret in turrets)
-        {
-            turret.StopAttack();
-        }
+        playerdetecting.enabled = false;
     }
 
 }

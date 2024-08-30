@@ -1,4 +1,6 @@
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
+using UnityEngine.Rendering;
 
 public class Turret : MonoBehaviour
 {
@@ -8,28 +10,30 @@ public class Turret : MonoBehaviour
 
     [SerializeField] Transform muzzlePoint;
 
-    [SerializeField] float attackTime;
+    [SerializeField] public float attackTime;
+
 
     float curTime;
 
-    bool isAttack;
-
-    int layermask;
-
-    public Mode mode { get; private set; }
+    public Mode mode;
 
     private void Awake()
     {
-        curTime = attackTime - 1;
-        layermask = 1 << LayerMask.NameToLayer("Player");
+        curTime = attackTime-1;
+        mode = Mode.Stop;
     }
 
     private void Update()
     {
-        if (!isAttack)
-            return;
-        //if (!Physics.Raycast(transform.position, transform.forward, layermask))
-        //    return;
+        CheckMode();
+        if(mode == Mode.Fire)
+        {
+            Fire();
+        }     
+    }
+
+    void Fire()
+    {
         curTime += Time.deltaTime;
         if (curTime > attackTime)
         {
@@ -37,16 +41,26 @@ public class Turret : MonoBehaviour
             curTime = 0;
         }
     }
+    void CheckMode()
+    {
+        if (mode == Mode.Stop)
+        {
+            StopAttack();
+        }
+        if (mode == Mode.Fire)
+        {
+            StartAttack();
+        }
+    }
 
     public void StartAttack()
     {
         mode = Mode.Fire;
-        this.isAttack = true;
     }
     public void StopAttack()
     {
         mode = Mode.Stop;
-        this.isAttack = false;
+        curTime = attackTime-1;
     }
     public GameObject Clone()
     {

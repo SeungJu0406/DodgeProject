@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 7504706638029570140}
   - component: {fileID: 8846371714867887162}
   - component: {fileID: 516423418120098501}
-  - component: {fileID: 659510330736611988}
   m_Layer: 7
   m_Name: Barrel
   m_TagString: Untagged
@@ -85,20 +84,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &659510330736611988
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1896837823520033191}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!1 &2277509920226579960
 GameObject:
   m_ObjectHideFlags: 0
@@ -145,6 +130,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 637703076, guid: 3c7685d9a4123cd4ca41a9583e021494, type: 3}
   size: 5
+--- !u!1 &2390433049875751227
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2319426878476908580}
+  m_Layer: 0
+  m_Name: RayPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2319426878476908580
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2390433049875751227}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.403, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4262473241223538421}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3046054379343474207
 GameObject:
   m_ObjectHideFlags: 0
@@ -156,6 +172,7 @@ GameObject:
   - component: {fileID: 4262473241223538421}
   - component: {fileID: 1660122117}
   - component: {fileID: 615243253990727520}
+  - component: {fileID: 6046281610339437428}
   m_Layer: 7
   m_Name: Turret
   m_TagString: Untagged
@@ -177,6 +194,7 @@ Transform:
   m_Children:
   - {fileID: 2799297394116168454}
   - {fileID: 7504706638029570140}
+  - {fileID: 2319426878476908580}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -195,6 +213,8 @@ MonoBehaviour:
   distance: 10
   rotateSpeed: 5
   turret: {fileID: 615243253990727520}
+  rayPoint: {fileID: 2319426878476908580}
+  curMode: 0
 --- !u!114 &615243253990727520
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -210,6 +230,33 @@ MonoBehaviour:
   bulletPool: {fileID: 741256956938188129}
   muzzlePoint: {fileID: 1619028753799911290}
   attackTime: 1.5
+--- !u!114 &6046281610339437428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3046054379343474207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1bd117a1ce34384fb114d4096b5c7d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnDetect:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1660122117}
+        m_TargetAssemblyTypeName: TurretRotate, Assembly-CSharp
+        m_MethodName: DetectTarget
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5471787895527905261
 GameObject:
   m_ObjectHideFlags: 0
